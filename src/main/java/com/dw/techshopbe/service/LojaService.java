@@ -4,6 +4,7 @@ import com.dw.techshopbe.entity.Pedido;
 import com.dw.techshopbe.entity.Produto;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -13,39 +14,19 @@ public class LojaService {
     private List<Produto> produtos;
     private List<Pedido> pedidos;
 
-
-    public void removePedido(Pedido pedido) {
-        for (Pedido p : pedidos) {
-            if (pedido.getCodigo().equals(p.getCodigo())) {
-                pedidos.remove(p);
-                break;
-            }
-        }
+    public LojaService() {
+        this.produtos = new ArrayList<>();
+        this.pedidos = new ArrayList<>();
     }
 
-    public Pedido pedidoEdit(Pedido pedido) {
-        Pedido pedidoToEdit = null;
-        for (Pedido p : pedidos) {
-            if (p.getCodigo().equals(pedido.getCodigo())) {
-                pedidoToEdit = pedido;
-                break;
-            }
-        }
-        return pedidoToEdit;
-    }
-
-    public Pedido addPedido(Pedido pedido) {
-        pedidos.add(pedido);
-        return pedido;
-    }
-
-
-    public Produto produtoDetail(Produto produto) {
+    public Produto produtoDetail(Long codigo) {
         Produto produtoMatch = null;
-        for (Produto p : produtos) {
-            if (p.getNome().equals(produto)) {
-                produtoMatch = produto;
-                break;
+        if (!produtos.isEmpty()) {
+            for (Produto p : produtos) {
+                if (p.getCodigo().equals(codigo)) {
+                    produtoMatch = p;
+                    break;
+                }
             }
         }
         return produtoMatch;
@@ -59,9 +40,7 @@ public class LojaService {
     }
 
     public void addProduto(Produto produto) {
-        if (!produtos.isEmpty()) {
-            produtos.add(produto);
-        }
+        produtos.add(produto);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.dw.techshopbe.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pedido {
@@ -8,10 +9,12 @@ public class Pedido {
     private Long codigo;
 
     public Pedido(Long codigo) {
-        this.produtos = produtos;
+        this.produtos = new ArrayList<>();
         this.codigo = codigo;
     }
 
+    public Pedido() {
+    }
 
     public List<Produto> getProdutos() {
         return produtos;
